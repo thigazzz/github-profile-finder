@@ -1,31 +1,7 @@
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { useState } from "react";
-
-interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
-
-const MockSearchInputInegrationComponent = () => {
-    const [valueExample, setValueExample] = useState('');
-    return (
-        <div>
-            <span>
-            {valueExample}
-            </span>
-            <SearchInput value={valueExample} onChange={(event) => setValueExample(event.target.value)}/>
-        </div>
-    )
-}
-
-const SearchInput = ({ ...rest }: SearchInputProps) => {
-  return (
-    <input
-      type="text"
-      data-testid="search-input-component"
-      placeholder="digite o nome do usuário"
-      {...rest}
-    />
-  );
-};
+import { MockSearchInputInegrationComponent } from "./mocks/MockSearchInputIntegrationComponent";
+import { SearchInput } from "./SearchInput";
 
 describe("Search Input Component", () => {
   describe("UNIT", () => {
