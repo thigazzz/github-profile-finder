@@ -2,9 +2,7 @@ import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 
-interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  value: string;
-}
+interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const MockSearchInputInegrationComponent = () => {
     const [valueExample, setValueExample] = useState('');
@@ -18,13 +16,12 @@ const MockSearchInputInegrationComponent = () => {
     )
 }
 
-const SearchInput = ({ value, ...rest }: SearchInputProps) => {
+const SearchInput = ({ ...rest }: SearchInputProps) => {
   return (
     <input
       type="text"
       data-testid="search-input-component"
       placeholder="digite o nome do usuário"
-      value={value}
       {...rest}
     />
   );
@@ -34,7 +31,7 @@ describe("Search Input Component", () => {
   describe("UNIT", () => {
     it("should call a function when user type on input", async () => {
       const mockFunction = jest.fn();
-      const { getByTestId, debug } = render(
+      const { getByTestId } = render(
         <SearchInput onChange={() => mockFunction()} value={""} />
       );
 
@@ -62,7 +59,7 @@ describe("Search Input Component", () => {
   });
   describe("INTEGRATION", () => {
     it('should change a state when user typed on component', async () => {
-        const {getByTestId, getByText, debug} = render(<MockSearchInputInegrationComponent/>)
+        const {getByTestId, getByText} = render(<MockSearchInputInegrationComponent/>)
 
         await userEvent.type(getByTestId('search-input-component'), 'any_text')
 
