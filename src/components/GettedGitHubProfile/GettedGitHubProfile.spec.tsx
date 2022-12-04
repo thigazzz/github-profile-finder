@@ -23,6 +23,11 @@ const GettedGitHubProfile = () => {
                     <li>3</li>
                 </ul>
             </div>
+            <div>
+                <div>
+                    <span>Seguidores</span>
+                </div>
+            </div>
         </section>
     )
 }
@@ -46,5 +51,10 @@ describe('Getted Git Hub Profile', () => {
 
         expect(getByTestId('github-profile-languages-title-element')).toBeInTheDocument()
         expect(getByTestId('github-profile-languages-element').childElementCount).toBe(3)
+    })
+    it('should have a followers section', () => {
+        const {getByText} = render(<GettedGitHubProfile/>)
+
+        expect(getByText(/seguidores/i)).toBeInTheDocument()
     })
 })
