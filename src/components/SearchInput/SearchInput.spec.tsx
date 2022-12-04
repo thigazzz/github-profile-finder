@@ -1,11 +1,24 @@
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { useState } from "react";
 
-interface SearchInputProps extends React.HTMLAttributes<HTMLInputElement> {
-    value: string;
+interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  value: string;
 }
 
-const SearchInput = ({ value,...rest }: SearchInputProps) => {
+const MockSearchInputInegrationComponent = () => {
+    const [valueExample, setValueExample] = useState('');
+    return (
+        <div>
+            <span>
+            {valueExample}
+            </span>
+            <SearchInput value={valueExample} onChange={(event) => setValueExample(event.target.value)}/>
+        </div>
+    )
+}
+
+const SearchInput = ({ value, ...rest }: SearchInputProps) => {
   return (
     <input
       type="text"
@@ -18,27 +31,42 @@ const SearchInput = ({ value,...rest }: SearchInputProps) => {
 };
 
 describe("Search Input Component", () => {
-  it("should call a function when user type on input", async () => {
-    const mockFunction = jest.fn();
-    const { getByTestId, debug } = render(
-      <SearchInput onChange={() => mockFunction()} value={''}/>
-    );
+  describe("UNIT", () => {
+    it("should call a function when user type on input", async () => {
+      const mockFunction = jest.fn();
+      const { getByTestId, debug } = render(
+        <SearchInput onChange={() => mockFunction()} value={""} />
+      );
 
-    await userEvent.type(getByTestId("search-input-component"), "any_text");
+      await userEvent.type(getByTestId("search-input-component"), "any_text");
 
-    expect(mockFunction).toHaveBeenCalled();
+      expect(mockFunction).toHaveBeenCalled();
+    });
+    it('should have a placeholder: "digite o nome do usuário', () => {
+      const { getByTestId } = render(
+        <SearchInput onChange={(text) => text} value={""} />
+      );
+
+      expect(getByTestId("search-input-component")).toHaveAttribute(
+        "placeholder",
+        "digite o nome do usuário"
+      );
+    });
+    it("should have a value in atributes", () => {
+      const { getByTestId } = render(
+        <SearchInput onChange={(text) => text} value={"any_value"} />
+      );
+
+      expect(getByTestId("search-input-component")).toHaveAttribute("value");
+    });
   });
-  it('should have a placeholder: "digite o nome do usuário', () => {
-    const { getByTestId } = render(<SearchInput onChange={(text) => text} value={''}/>);
+  describe("INTEGRATION", () => {
+    it('should change a state when user typed on component', async () => {
+        const {getByTestId, getByText, debug} = render(<MockSearchInputInegrationComponent/>)
 
-    expect(getByTestId("search-input-component")).toHaveAttribute(
-      "placeholder",
-      "digite o nome do usuário"
-    );
+        await userEvent.type(getByTestId('search-input-component'), 'any_text')
+
+        expect(getByText(/any_text/i)).toBeInTheDocument()
+    })
   });
-  it('should have a value in atributes', () => {
-    const { getByTestId } = render(<SearchInput onChange={(text) => text} value={'any_value'}/> );
-
-    expect(getByTestId("search-input-component")).toHaveAttribute('value')
-  })
 });
