@@ -10,8 +10,8 @@ const SearchButton = () => {
 
 describe('Search Button Component', () => {
     it('should have a content text: Pesquisar (isso irá mudar mais tarde)', () => {
-        const {getByText} = render(<SearchButton/>)
+        const {container} = render(<SearchButton/>)
 
-        expect(getByText(/pesquisar/i)).toBeInTheDocument()
+        expect(container).toHaveTextContent(/pesquisar/i)
     })
 })
