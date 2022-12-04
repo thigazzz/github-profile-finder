@@ -33,6 +33,9 @@ const GettedGitHubProfile = () => {
                 <div>
                     <span>Repositórios</span>
                 </div>
+                <div>
+                    <span>Estrelas</span>
+                </div>
             </div>
         </section>
     )
@@ -72,5 +75,10 @@ describe('Getted Git Hub Profile', () => {
         const {getByText} = render(<GettedGitHubProfile/>)
 
         expect(getByText(/repositórios/i)).toBeInTheDocument()
+    })
+    it('should have a stars section', () => {
+        const {getByText} = render(<GettedGitHubProfile/>)
+
+        expect(getByText(/estrelas/i)).toBeInTheDocument()
     })
 })
