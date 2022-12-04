@@ -4,7 +4,7 @@ import React from "react"
 
 const SearchButton = ({...rest}: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
     return (
-        <button {...rest} data-testid='button-test'>
+        <button {...rest} data-testid='search-button-component'>
             Pesquisar
         </button>
     )
@@ -15,14 +15,14 @@ describe('Search Button Component', () => {
         const mockHandleClickFunction = jest.fn()
         const {getByTestId} = render(<SearchButton onClick={mockHandleClickFunction}/>)
 
-        await userEvent.click(getByTestId('button-test'))
+        await userEvent.click(getByTestId('search-button-component'))
 
         expect(mockHandleClickFunction).toHaveBeenCalled()
     })
     it('should be disabled if props is passed', () => {
         const {getByTestId} = render(<SearchButton disabled={true}/>)
 
-        expect(getByTestId('button-test')).toBeDisabled()
+        expect(getByTestId('search-button-component')).toBeDisabled()
     })
     it('should have a content text: Pesquisar (isso irá mudar mais tarde)', () => {
         const {container} = render(<SearchButton/>)
