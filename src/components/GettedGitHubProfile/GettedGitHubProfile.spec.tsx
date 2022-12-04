@@ -16,7 +16,12 @@ const GettedGitHubProfile = () => {
                 </div>
             </div>
             <div>
-                <h3 data-testid='github-profile-languages-element'>Linguagens</h3>
+                <h3 data-testid='github-profile-languages-title-element'>Linguagens</h3>
+                <ul data-testid='github-profile-languages-element'>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
             </div>
         </section>
     )
@@ -36,9 +41,10 @@ describe('Getted Git Hub Profile', () => {
         expect(getByTestId('github-profile-username-element')).toBeInTheDocument()
         expect(getByTestId('github-profile-bio-element')).toBeInTheDocument()
     })
-    it('should have a div for github user languages', () => {
+    it('should have a div for github user languages, with maximum 3 languages', () => {
         const {getByTestId} = render(<GettedGitHubProfile/>)
 
-        expect(getByTestId('github-profile-languages-element')).toBeInTheDocument()
+        expect(getByTestId('github-profile-languages-title-element')).toBeInTheDocument()
+        expect(getByTestId('github-profile-languages-element').childElementCount).toBe(3)
     })
 })
