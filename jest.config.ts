@@ -4,6 +4,9 @@ export default {
   coverageDirectory: "coverage",
   coverageProvider: "v8",
   testEnvironment: "jsdom",
+  setupFilesAfterEnv: [
+    '<rootDir>/__jest__/jest.setup.ts'
+  ],
   transform: {
     "^.+\\.(t|j)sx?$": [
       "@swc/jest",
