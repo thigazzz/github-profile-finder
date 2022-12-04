@@ -19,6 +19,11 @@ describe('Search Button Component', () => {
 
         expect(mockHandleClickFunction).toHaveBeenCalled()
     })
+    it('should be disabled if props is passed', () => {
+        const {getByTestId} = render(<SearchButton disabled={true}/>)
+
+        expect(getByTestId('button-test')).toBeDisabled()
+    })
     it('should have a content text: Pesquisar (isso irá mudar mais tarde)', () => {
         const {container} = render(<SearchButton/>)
 
