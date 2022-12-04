@@ -27,6 +27,9 @@ const GettedGitHubProfile = () => {
                 <div>
                     <span>Seguidores</span>
                 </div>
+                <div>
+                    <span>Seguindo</span>
+                </div>
             </div>
         </section>
     )
@@ -56,5 +59,10 @@ describe('Getted Git Hub Profile', () => {
         const {getByText} = render(<GettedGitHubProfile/>)
 
         expect(getByText(/seguidores/i)).toBeInTheDocument()
+    })
+    it('should have a following section', () => {
+        const {getByText} = render(<GettedGitHubProfile/>)
+
+        expect(getByText(/seguindo/i)).toBeInTheDocument()
     })
 })
