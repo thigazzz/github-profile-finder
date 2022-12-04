@@ -1,14 +1,6 @@
 import { render } from "@testing-library/react"
 import userEvent from '@testing-library/user-event'
-import React from "react"
-
-const SearchButton = ({...rest}: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
-    return (
-        <button {...rest} data-testid='search-button-component'>
-            Pesquisar
-        </button>
-    )
-}
+import { SearchButton } from "./SearchButton"
 
 describe('Search Button Component', () => {
     it('should call a function when button was clicked', async () => {
