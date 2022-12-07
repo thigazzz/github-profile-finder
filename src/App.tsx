@@ -1,7 +1,10 @@
+import { MainPage } from "./pages/Main/MainPage"
+
 function App() {
   return (
     <div className="App">
-      Hello
+      hello 
+      <MainPage/>
     </div>
   )
 }

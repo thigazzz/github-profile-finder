@@ -1,50 +1,42 @@
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import axios from "axios";
-import { GettedGitHubProfile } from "../../components/GettedGitHubProfile/GettedGitHubProfile";
-import { SearchButton } from "../../components/SearchButton/SearchButton";
-import { SearchInput } from "../../components/SearchInput/SearchInput";
+import { MainPage } from "./MainPage";
 
-jest.mock("axios");
+jest.mock('axios')
 
-const mockedAxios = axios as jest.Mocked<typeof axios>;
-
-const MainPage = () => {
-  return (
-    <div>
-      <header>
-        <span>GitSearch</span>
-      </header>
-      <SearchInput data-testid="search-input-component" />
-      <SearchButton data-testid="search-button-component" />
-      <GettedGitHubProfile data-testid="getted-github-profile-component" />
-    </div>
-  );
-};
+const mockedAxios = axios as jest.Mocked<typeof axios>
 
 describe("Main Page", () => {
   it("should show a github user profile when user type in input and click to search", async () => {
-    const { getByTestId } = render(<MainPage />);
-    mockedAxios.get.mockResolvedValue({
-      data: {
-        name: "Thiago",
-        username: "thigaz",
-        avatar_url: "ant_avatar",
-        biography: "any_bio",
-        languages: ["Javascript", "PHP", "Haskell"],
+    const { getByTestId, debug } = render(<MainPage />);
+    mockedAxios.get.mockResolvedValueOnce({data: {
+        login: 'any_login',
+        name: 'any_name',
+        avatar_url: 'any_url',
+        bio: 'any_bio',
+        public_repos: 10,
         followers: 10,
-        following: 10,
-        repositories: 10,
-        stars: 10,
-      },
-    });
+        following: 10
+    }}).mockResolvedValueOnce({data: [
+        {language: 'Typescript'},
+        {language: 'Typescript'},
+        {language: 'Typescript'}
+    ]}).mockResolvedValueOnce({data: [
+        {any: 'any'},
+        {any: 'any'},
+        {any: 'any'},
+    ]})
 
-    await userEvent.type(getByTestId("search-input-component"), "any_user");
+    await userEvent.type(
+      getByTestId("search-input-component"),
+      "constThiagoSilva"
+    );
     await userEvent.click(getByTestId("search-button-component"));
 
-    expect(
-      getByTestId("getted-github-profile-component")
-    ).not.toHaveTextContent(/no user/i);
+     expect(
+       getByTestId("getted-github-profile-component")
+     ).not.toHaveTextContent(/no user/i);
   });
   it("should have a SearchButton component", () => {
     const { getByTestId } = render(<MainPage />);
