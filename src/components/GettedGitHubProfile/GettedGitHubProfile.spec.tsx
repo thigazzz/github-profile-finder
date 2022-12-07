@@ -1,40 +1,52 @@
 import { render } from "@testing-library/react"
 
-const GettedGitHubProfile = () => {
+interface GettedGitHubProfileProps {
+    profileData?: {
+        name: string;
+    username: string;
+    avatar_url: string;
+    biography: string;
+    languages: string[];
+    followers: number;
+    following: number;
+    repositories: number;
+    stars: number;
+    }
+}
+
+const GettedGitHubProfile = ({profileData}: GettedGitHubProfileProps) => {
     return (
         <section>
             <div>
-                <img src="#" alt="github-profile-image" data-testid='github-profile-image-element'/>
+                <img src={profileData?.avatar_url} alt="github-profile-image" data-testid='github-profile-image-element'/>
             </div>
             <div>
-                <h1 data-testid='github-profile-name-element'>Nome usuário</h1>
-                <span data-testid='github-profile-username-element'>Usrname</span>
+                <h1 data-testid='github-profile-name-element'>{profileData?.name}</h1>
+                <span data-testid='github-profile-username-element'>{profileData?.username}</span>
                 <div>
                     <p data-testid='github-profile-bio-element'>
-
+                        {profileData?.biography}
                     </p>
                 </div>
             </div>
             <div>
                 <h3 data-testid='github-profile-languages-title-element'>Linguagens</h3>
                 <ul data-testid='github-profile-languages-element'>
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
+                {profileData?.languages.map(language => <li key={language}>{language}</li>)}
                 </ul>
             </div>
             <div>
                 <div>
-                    <span>Seguidores</span>
+                    <span>Seguidores {profileData?.followers}</span>
                 </div>
                 <div>
-                    <span>Seguindo</span>
+                    <span>Seguindo {profileData?.following}</span>
                 </div>
                 <div>
-                    <span>Repositórios</span>
+                    <span>Repositórios {profileData?.repositories}</span>
                 </div>
                 <div>
-                    <span>Estrelas</span>
+                    <span>Estrelas {profileData?.stars}</span>
                 </div>
             </div>
         </section>
@@ -42,6 +54,36 @@ const GettedGitHubProfile = () => {
 }
 
 describe('Getted Git Hub Profile', () => {
+    it('should get the github profile data and set on fields', () => {
+        const mockGithubProfileData = {
+            name: 'Thiago',
+            username: 'thigaz',
+            avatar_url: 'ant_avatar',
+            biography: 'any_bio',
+            languages: [
+                'Javascript',
+                'PHP',
+                'Haskell'
+            ],
+            followers: 10,
+            following: 10,
+            repositories: 10,
+            stars: 10
+        }
+        const {getByText, getAllByTestId, getByTestId} = render(<GettedGitHubProfile profileData={mockGithubProfileData}/>)
+        
+        expect(getByText(/Thiago/i)).toBeInTheDocument()
+        expect(getByText(/thigaz/i)).toBeInTheDocument()
+        expect(getByText(/any_bio/i)).toBeInTheDocument()
+        expect(getByTestId('github-profile-image-element')).toHaveAttribute('src', mockGithubProfileData.avatar_url)
+        getAllByTestId('github-profile-languages-element').map(language => expect(language).toBeInTheDocument())
+        expect(getByText(`Seguidores 10`)).toBeInTheDocument()
+        expect(getByText(`Seguindo 10`)).toBeInTheDocument()
+        expect(getByText(`Repositórios 10`)).toBeInTheDocument()
+        expect(getByText(`Estrelas 10`)).toBeInTheDocument()
+        
+    })
+
     it('should have a image element to github profile', () => {
         const {getByTestId} = render(<GettedGitHubProfile/>)
 
@@ -56,7 +98,22 @@ describe('Getted Git Hub Profile', () => {
         expect(getByTestId('github-profile-bio-element')).toBeInTheDocument()
     })
     it('should have a div for github user languages, with maximum 3 languages', () => {
-        const {getByTestId} = render(<GettedGitHubProfile/>)
+        const mockGithubProfileData = {
+            name: 'Thiago',
+            username: 'thigaz',
+            avatar_url: 'ant_avatar',
+            biography: 'any_bio',
+            languages: [
+                'Javascript',
+                'PHP',
+                'Haskell'
+            ],
+            followers: 10,
+            following: 10,
+            repositories: 10,
+            stars: 10
+        }
+        const {getByTestId} = render(<GettedGitHubProfile profileData={mockGithubProfileData}/>)
 
         expect(getByTestId('github-profile-languages-title-element')).toBeInTheDocument()
         expect(getByTestId('github-profile-languages-element').childElementCount).toBe(3)
