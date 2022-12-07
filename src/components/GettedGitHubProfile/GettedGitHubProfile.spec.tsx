@@ -35,7 +35,20 @@ describe("Getted Git Hub Profile", () => {
   });
 
   it("should have a image element to github profile", () => {
-    const { getByTestId } = render(<GettedGitHubProfile />);
+    const mockGithubProfileData = {
+      name: "Thiago",
+      username: "thigaz",
+      avatar_url: "ant_avatar",
+      biography: "any_bio",
+      languages: ["Javascript", "PHP", "Haskell"],
+      followers: 10,
+      following: 10,
+      repositories: 10,
+      stars: 10,
+    };
+    const { getByTestId } = render(
+      <GettedGitHubProfile profileData={mockGithubProfileData} />
+    );
 
     expect(getByTestId("github-profile-image-element")).toBeInTheDocument();
     expect(getByTestId("github-profile-image-element")).toHaveAttribute(
@@ -44,7 +57,20 @@ describe("Getted Git Hub Profile", () => {
     );
   });
   it("should have a div for github user name, and sub divs: username, bio", () => {
-    const { getByTestId } = render(<GettedGitHubProfile />);
+    const mockGithubProfileData = {
+      name: "Thiago",
+      username: "thigaz",
+      avatar_url: "ant_avatar",
+      biography: "any_bio",
+      languages: ["Javascript", "PHP", "Haskell"],
+      followers: 10,
+      following: 10,
+      repositories: 10,
+      stars: 10,
+    };
+    const { getByTestId } = render(
+      <GettedGitHubProfile profileData={mockGithubProfileData} />
+    );
 
     expect(getByTestId("github-profile-name-element")).toBeInTheDocument();
     expect(getByTestId("github-profile-username-element")).toBeInTheDocument();
@@ -74,22 +100,74 @@ describe("Getted Git Hub Profile", () => {
     ).toBe(3);
   });
   it("should have a followers section", () => {
-    const { getByText } = render(<GettedGitHubProfile />);
+    const mockGithubProfileData = {
+      name: "Thiago",
+      username: "thigaz",
+      avatar_url: "ant_avatar",
+      biography: "any_bio",
+      languages: ["Javascript", "PHP", "Haskell"],
+      followers: 10,
+      following: 10,
+      repositories: 10,
+      stars: 10,
+    };
+    const { getByText } = render(
+      <GettedGitHubProfile profileData={mockGithubProfileData} />
+    );
 
     expect(getByText(/seguidores/i)).toBeInTheDocument();
   });
   it("should have a following section", () => {
-    const { getByText } = render(<GettedGitHubProfile />);
+    const mockGithubProfileData = {
+      name: "Thiago",
+      username: "thigaz",
+      avatar_url: "ant_avatar",
+      biography: "any_bio",
+      languages: ["Javascript", "PHP", "Haskell"],
+      followers: 10,
+      following: 10,
+      repositories: 10,
+      stars: 10,
+    };
+    const { getByText } = render(
+      <GettedGitHubProfile profileData={mockGithubProfileData} />
+    );
 
     expect(getByText(/seguindo/i)).toBeInTheDocument();
   });
   it("should have a repositories section", () => {
-    const { getByText } = render(<GettedGitHubProfile />);
+    const mockGithubProfileData = {
+      name: "Thiago",
+      username: "thigaz",
+      avatar_url: "ant_avatar",
+      biography: "any_bio",
+      languages: ["Javascript", "PHP", "Haskell"],
+      followers: 10,
+      following: 10,
+      repositories: 10,
+      stars: 10,
+    };
+    const { getByText } = render(
+      <GettedGitHubProfile profileData={mockGithubProfileData} />
+    );
 
     expect(getByText(/repositórios/i)).toBeInTheDocument();
   });
   it("should have a stars section", () => {
-    const { getByText } = render(<GettedGitHubProfile />);
+    const mockGithubProfileData = {
+      name: "Thiago",
+      username: "thigaz",
+      avatar_url: "ant_avatar",
+      biography: "any_bio",
+      languages: ["Javascript", "PHP", "Haskell"],
+      followers: 10,
+      following: 10,
+      repositories: 10,
+      stars: 10,
+    };
+    const { getByText } = render(
+      <GettedGitHubProfile profileData={mockGithubProfileData} />
+    );
 
     expect(getByText(/estrelas/i)).toBeInTheDocument();
   });
