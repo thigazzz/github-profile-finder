@@ -1,4 +1,4 @@
-interface GettedGitHubProfileProps {
+interface GettedGitHubProfileProps extends React.SelectHTMLAttributes<HTMLDivElement>{
   profileData?: {
     name: string;
     username: string;
@@ -13,10 +13,10 @@ interface GettedGitHubProfileProps {
 }
 
 export const GettedGitHubProfile = ({
-  profileData,
+  profileData, ...rest
 }: GettedGitHubProfileProps) => {
   return (
-    <section>
+    <section {...rest}>
       <div>
         <img
           src={profileData?.avatar_url}
