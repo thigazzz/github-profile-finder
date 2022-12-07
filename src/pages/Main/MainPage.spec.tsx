@@ -1,4 +1,5 @@
 import { render } from "@testing-library/react"
+import userEvent from '@testing-library/user-event'
 import { GettedGitHubProfile } from "../../components/GettedGitHubProfile/GettedGitHubProfile"
 import { SearchButton } from "../../components/SearchButton/SearchButton"
 import { SearchInput } from "../../components/SearchInput/SearchInput"
@@ -19,6 +20,14 @@ const MainPage = () => {
 }
 
 describe('Main Page', () => {
+    it('should show a github user profile when user type in input and click to search', async () => {
+        const {getByTestId} = render(<MainPage/>)
+
+        await userEvent.type(getByTestId('search-input-component'), 'any_user')
+        await userEvent.click(getByTestId('search-button-component'))
+
+        expect(getByTestId('getted-github-profile-component')).not.toHaveTextContent(/no user/i)
+    })
     it('should have a SearchButton component', () => {
         const {getByTestId} = render(<MainPage/>)
 
