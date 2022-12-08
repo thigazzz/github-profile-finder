@@ -105,7 +105,9 @@ export const GettedGitHubProfile = ({
               </div>
             </>
           ) : (
-            <LoadingSpinner data-testid="loading-component" />
+            <div className="w-full h-full flex justify-center items-center">
+              <LoadingSpinner data-testid="loading-component" />
+            </div>
           )}
         </>
       ) : (
