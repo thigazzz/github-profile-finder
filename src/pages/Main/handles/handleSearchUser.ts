@@ -7,9 +7,9 @@ import {
 export const handleSearchUser = async (
   username: string,
   setState: React.Dispatch<SetStateAction<GithubUserData | undefined>>,
-  setLoading: React.Dispatch<SetStateAction<boolean>>
+  setLoading: React.Dispatch<SetStateAction<boolean>> | undefined
 ) => {
-  setLoading(true)
+  setLoading?.(true)
 
   const receivedUsernameProfileData = await receiveGithubUserProfileData(
     username
@@ -27,5 +27,5 @@ export const handleSearchUser = async (
     stars: receivedUsernameProfileData.stars,
   });
 
-  setLoading(false)
+  setLoading?.(false)
 };
