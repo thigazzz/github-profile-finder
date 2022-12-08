@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { GettedGitHubProfile } from "../../components/GettedGitHubProfile/GettedGitHubProfile";
 import { SearchButton } from "../../components/SearchButton/SearchButton";
 import { SearchInput } from "../../components/SearchInput/SearchInput";
+import { ILoadingContext, LoadingContext } from "../../contexts/LoadingContext";
 import { GithubUserData } from "./functions/receiveGithubUserProfileData";
 import { handleSearchUser } from "./handles/handleSearchUser";
 
 export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
+  const {setLoading} = useContext(LoadingContext) as ILoadingContext
   const [githubUsernameToSearch, setGithubUsernameToSearch] = useState("");
   const [githubProfileData, setGithubProfileData] = useState<
     GithubUserData | undefined
@@ -36,7 +38,7 @@ export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
             <SearchButton
               data-testid="search-button-component"
               onClick={() =>
-                handleSearchUser(githubUsernameToSearch, setGithubProfileData)
+                handleSearchUser(githubUsernameToSearch, setGithubProfileData, setLoading)
               }
               />
               </div>
