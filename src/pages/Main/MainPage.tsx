@@ -4,6 +4,7 @@ import { GettedGitHubProfile } from "../../components/GettedGitHubProfile/Getted
 import { SearchButton } from "../../components/SearchButton/SearchButton";
 import { SearchInput } from "../../components/SearchInput/SearchInput";
 import { githubApi } from "../../services/githubApi";
+import { receiveGithubUserProfileData } from "./functions/receiveGithubUserProfileData";
 
 export const MainPage = () => {
   const [githubUsernameToSearch, setGithubUsernameToSearch] = useState("");
@@ -23,35 +24,18 @@ export const MainPage = () => {
   >(undefined);
 
   const handleSearchUser = async (username: string) => {
-    const { data: receivedUsernameProfileData } = await githubApi.get<{
-      login: string;
-      name: string;
-      avatar_url: string;
-      bio: string;
-      public_repos: number;
-      followers: number;
-      following: number;
-    }>(`users/${username}`);
-    console.log(receivedUsernameProfileData);
-    const { data: receivedUsernameProgrammingLanguages } = await githubApi.get<
-      [{ language: string }]
-    >(`users/${username}/repos`);
-    console.log(receivedUsernameProgrammingLanguages);
-    const { data: receivedUsernameStarred } = await githubApi.get<[]>(
-      `users/${username}/repos`
-    );
-    console.log(receivedUsernameStarred);
+    const receivedUsernameProfileData = await receiveGithubUserProfileData(username)
 
     setGithubProfileData({
       name: receivedUsernameProfileData.name,
-      username: receivedUsernameProfileData.login,
+      username: receivedUsernameProfileData.username,
       avatar_url: receivedUsernameProfileData.avatar_url,
-      biography: receivedUsernameProfileData.bio,
+      biography: receivedUsernameProfileData.biography,
       languages: ["Javascript", "PHP", "Haskell"],
       followers: receivedUsernameProfileData.followers,
       following: receivedUsernameProfileData.following,
-      repositories: receivedUsernameProfileData.public_repos,
-      stars: receivedUsernameStarred.length,
+      repositories: receivedUsernameProfileData.repositories,
+      stars: receivedUsernameProfileData.stars,
     });
   };
 

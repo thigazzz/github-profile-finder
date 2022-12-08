@@ -1,8 +1,20 @@
 import { githubApi } from "../../../services/githubApi";
 
+interface GithubUserData {
+    name: string,
+    username: string,
+    avatar_url: string,
+    biography: string,
+    languages: string[],
+    followers: number,
+    following: number,
+    repositories: number,
+    stars: number,
+}
+
 export const receiveGithubUserProfileData = async (
   username: string
-): Promise<{}> => {
+): Promise<GithubUserData> => {
   const receivedUsernameProfilePromise = githubApi.get<{
     login: string;
     name: string;
