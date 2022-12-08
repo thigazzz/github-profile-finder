@@ -189,9 +189,20 @@ describe("Getted Git Hub Profile", () => {
     expect(getByText(/estrelas/i)).toBeInTheDocument();
   });
   it("should render a loading when the informations not finish yet", () => {
+    const mockGithubProfileData = {
+      name: "Thiago",
+      username: "thigaz",
+      avatar_url: "ant_avatar",
+      biography: "any_bio",
+      languages: ["Javascript", "PHP", "Haskell"],
+      followers: 10,
+      following: 10,
+      repositories: 10,
+      stars: 10,
+    };
     const { getByTestId } = render(
       <LoadingContext.Provider value={{ loading: true }}>
-        <GettedGitHubProfile />
+        <GettedGitHubProfile profileData={mockGithubProfileData}/>
       </LoadingContext.Provider>
     );
 
