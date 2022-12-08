@@ -1,6 +1,6 @@
 import { githubApi } from "../../../services/githubApi";
 
-interface GithubUserData {
+export interface GithubUserData {
     name: string,
     username: string,
     avatar_url: string,
