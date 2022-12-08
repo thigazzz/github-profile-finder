@@ -1,4 +1,5 @@
 import { githubApi } from "../../../services/githubApi";
+import { setMostUsedProgrammingLanguages } from "../utils/setMostUsedProgrammingLanguages";
 
 export interface GithubUserData {
     name: string,
@@ -42,7 +43,7 @@ export const receiveGithubUserProfileData = async (
     username: response[0].data.login,
     avatar_url: response[0].data.avatar_url,
     biography: response[0].data.bio,
-    languages: ["Javascript", "PHP", "Haskell"],
+    languages: setMostUsedProgrammingLanguages(response[1].data),
     followers: response[0].data.followers,
     following: response[0].data.following,
     repositories: response[0].data.public_repos,

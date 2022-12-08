@@ -17,8 +17,8 @@ describe("Received Github User Profile", () => {
         following: 10
     }}).mockResolvedValueOnce({data: [
         {language: 'Typescript'},
-        {language: 'Typescript'},
-        {language: 'Typescript'}
+        {language: 'PHP'},
+        {language: 'Haskell'}
     ]}).mockResolvedValueOnce({data: [
         {any: 'any'},
         {any: 'any'},
@@ -30,7 +30,7 @@ describe("Received Github User Profile", () => {
       username: "any_login",
       avatar_url: "any_url",
       biography: "any_bio",
-      languages: ["Javascript", "PHP", "Haskell"],
+      languages: ["Typescript", "PHP", "Haskell"],
       followers: 10,
       following: 10,
       repositories: 10,
