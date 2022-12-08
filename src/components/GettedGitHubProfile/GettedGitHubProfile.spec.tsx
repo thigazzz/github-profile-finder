@@ -1,4 +1,5 @@
 import { render } from "@testing-library/react";
+import { LoadingContext } from "../../contexts/LoadingContext";
 import { GettedGitHubProfile } from "./GettedGitHubProfile";
 
 describe("Getted Git Hub Profile", () => {
@@ -15,7 +16,9 @@ describe("Getted Git Hub Profile", () => {
       stars: 10,
     };
     const { getByText, getAllByTestId, getByTestId } = render(
-      <GettedGitHubProfile profileData={mockGithubProfileData} />
+      <LoadingContext.Provider value={{ loading: false }}>
+        <GettedGitHubProfile profileData={mockGithubProfileData} />
+      </LoadingContext.Provider>
     );
 
     expect(getByText(/Thiago/i)).toBeInTheDocument();
@@ -28,10 +31,10 @@ describe("Getted Git Hub Profile", () => {
     getAllByTestId("github-profile-languages-element").map((language) =>
       expect(language).toBeInTheDocument()
     );
-    expect(getByText(`Seguidores 10`)).toBeInTheDocument();
-    expect(getByText(`Seguindo 10`)).toBeInTheDocument();
-    expect(getByText(`Repositórios 10`)).toBeInTheDocument();
-    expect(getByText(`Estrelas 10`)).toBeInTheDocument();
+    expect(getByText(`Seguidores`)).toBeInTheDocument();
+    expect(getByText(`Seguindo`)).toBeInTheDocument();
+    expect(getByText(`Repositórios`)).toBeInTheDocument();
+    expect(getByText(`Estrelas`)).toBeInTheDocument();
   });
 
   it("should have a image element to github profile", () => {
@@ -47,7 +50,9 @@ describe("Getted Git Hub Profile", () => {
       stars: 10,
     };
     const { getByTestId } = render(
-      <GettedGitHubProfile profileData={mockGithubProfileData} />
+      <LoadingContext.Provider value={{ loading: false }}>
+        <GettedGitHubProfile profileData={mockGithubProfileData} />
+      </LoadingContext.Provider>
     );
 
     expect(getByTestId("github-profile-image-element")).toBeInTheDocument();
@@ -69,7 +74,9 @@ describe("Getted Git Hub Profile", () => {
       stars: 10,
     };
     const { getByTestId } = render(
-      <GettedGitHubProfile profileData={mockGithubProfileData} />
+      <LoadingContext.Provider value={{ loading: false }}>
+        <GettedGitHubProfile profileData={mockGithubProfileData} />
+      </LoadingContext.Provider>
     );
 
     expect(getByTestId("github-profile-name-element")).toBeInTheDocument();
@@ -89,7 +96,9 @@ describe("Getted Git Hub Profile", () => {
       stars: 10,
     };
     const { getByTestId } = render(
-      <GettedGitHubProfile profileData={mockGithubProfileData} />
+      <LoadingContext.Provider value={{ loading: false }}>
+        <GettedGitHubProfile profileData={mockGithubProfileData} />
+      </LoadingContext.Provider>
     );
 
     expect(
@@ -112,7 +121,9 @@ describe("Getted Git Hub Profile", () => {
       stars: 10,
     };
     const { getByText } = render(
-      <GettedGitHubProfile profileData={mockGithubProfileData} />
+      <LoadingContext.Provider value={{ loading: false }}>
+        <GettedGitHubProfile profileData={mockGithubProfileData} />
+      </LoadingContext.Provider>
     );
 
     expect(getByText(/seguidores/i)).toBeInTheDocument();
@@ -130,7 +141,9 @@ describe("Getted Git Hub Profile", () => {
       stars: 10,
     };
     const { getByText } = render(
-      <GettedGitHubProfile profileData={mockGithubProfileData} />
+      <LoadingContext.Provider value={{ loading: false }}>
+        <GettedGitHubProfile profileData={mockGithubProfileData} />
+      </LoadingContext.Provider>
     );
 
     expect(getByText(/seguindo/i)).toBeInTheDocument();
@@ -148,7 +161,9 @@ describe("Getted Git Hub Profile", () => {
       stars: 10,
     };
     const { getByText } = render(
-      <GettedGitHubProfile profileData={mockGithubProfileData} />
+      <LoadingContext.Provider value={{ loading: false }}>
+        <GettedGitHubProfile profileData={mockGithubProfileData} />
+      </LoadingContext.Provider>
     );
 
     expect(getByText(/repositórios/i)).toBeInTheDocument();
@@ -166,9 +181,20 @@ describe("Getted Git Hub Profile", () => {
       stars: 10,
     };
     const { getByText } = render(
-      <GettedGitHubProfile profileData={mockGithubProfileData} />
+      <LoadingContext.Provider value={{ loading: false }}>
+        <GettedGitHubProfile profileData={mockGithubProfileData} />
+      </LoadingContext.Provider>
     );
 
     expect(getByText(/estrelas/i)).toBeInTheDocument();
+  });
+  it("should render a loading when the informations not finish yet", () => {
+    const { getByTestId } = render(
+      <LoadingContext.Provider value={{ loading: true }}>
+        <GettedGitHubProfile />
+      </LoadingContext.Provider>
+    );
+
+    expect(getByTestId("loading-component")).toBeInTheDocument();
   });
 });

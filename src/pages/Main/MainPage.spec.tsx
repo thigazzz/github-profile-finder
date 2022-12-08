@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { LoadingProvider } from "../../contexts/LoadingContext";
 import { githubApi } from "../../services/githubApi";
 import { MainPage } from "./MainPage";
 
@@ -9,7 +10,7 @@ const mockedAxios = githubApi as jest.Mocked<typeof githubApi>
 
 describe("Main Page", () => {
   it("should show a github user profile when user type in input and click to search", async () => {
-    const { getByTestId, debug } = render(<MainPage />);
+    const { getByTestId, debug } = render(<MainPage />, {wrapper: LoadingProvider});
     mockedAxios.get.mockResolvedValueOnce({data: {
         login: 'any_login',
         name: 'any_name',
@@ -39,22 +40,22 @@ describe("Main Page", () => {
      ).not.toHaveTextContent(/no user/i);
   });
   it("should have a SearchButton component", () => {
-    const { getByTestId } = render(<MainPage />);
+    const { getByTestId } = render(<MainPage />, {wrapper: LoadingProvider});
 
     expect(getByTestId("search-button-component")).toBeInTheDocument();
   });
   it("should have a SearchInput component", () => {
-    const { getByTestId } = render(<MainPage />);
+    const { getByTestId } = render(<MainPage />,{wrapper: LoadingProvider});
 
     expect(getByTestId("search-input-component")).toBeInTheDocument();
   });
   it("should have a GettedGithubProfile component", () => {
-    const { getByTestId } = render(<MainPage />);
+    const { getByTestId } = render(<MainPage />,{wrapper: LoadingProvider});
 
     expect(getByTestId("getted-github-profile-component")).toBeInTheDocument();
   });
   it("should have a header component with text: GitSearch", () => {
-    const { getByText } = render(<MainPage />);
+    const { getByText } = render(<MainPage />, {wrapper: LoadingProvider});
 
     expect(getByText("git.Search")).toBeInTheDocument();
   });

@@ -1,8 +1,8 @@
 import React, { createContext, ReactNode, SetStateAction, useState } from "react";
 
-interface ILoadingContext {
-    loading: boolean;
-    setLoading: React.Dispatch<SetStateAction<boolean>>
+export interface ILoadingContext {
+    loading?: boolean;
+    setLoading?: React.Dispatch<SetStateAction<boolean>>
 }
 
 export const LoadingContext = createContext<ILoadingContext | null>(null)
