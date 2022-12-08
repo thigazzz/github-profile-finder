@@ -20,16 +20,19 @@ export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
       </header>
 
       <div className="w-full flex-1 flex justify-center items-center">
-        <main className="w-[80%] h-[60%] lg:w-[60%] rounded-md p-5 flex items-center flex-col shadow-sm">
+        <main className="w-[80%] h-[60%] lg:w-[60%] rounded-md p-5 flex items-center flex-col shadow-sm ">
           <div className="w-full h-10 flex items-center">
+            <div className="w-full h-full flex-1">
+
             <SearchInput
               data-testid="search-input-component"
               onChange={(event) =>
                 setGithubUsernameToSearch(event.target.value)
               }
               value={githubUsernameToSearch}
-            />
-            <div className="flex-1">
+              />
+              </div>
+            <div className="h-full w-10 ml-2">
             <SearchButton
               data-testid="search-button-component"
               onClick={() =>

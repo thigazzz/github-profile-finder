@@ -17,8 +17,8 @@ describe('Search Button Component', () => {
         expect(getByTestId('search-button-component')).toBeDisabled()
     })
     it('should have a content text: Pesquisar (isso irá mudar mais tarde)', () => {
-        const {container} = render(<SearchButton/>)
+        const {getByTestId} = render(<SearchButton/>)
 
-        expect(container).toHaveTextContent(/pesquisar/i)
+        expect(getByTestId('icon-search')).toBeInTheDocument()
     })
 })

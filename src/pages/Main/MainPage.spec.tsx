@@ -56,6 +56,6 @@ describe("Main Page", () => {
   it("should have a header component with text: GitSearch", () => {
     const { getByText } = render(<MainPage />);
 
-    expect(getByText("GitSearch")).toBeInTheDocument();
+    expect(getByText("git.Search")).toBeInTheDocument();
   });
 });

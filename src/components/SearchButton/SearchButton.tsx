@@ -1,3 +1,5 @@
+import {BiSearch} from 'react-icons/bi'
+
 export const SearchButton = ({
   ...rest
 }: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
@@ -5,9 +7,9 @@ export const SearchButton = ({
     <button
       {...rest}
       data-testid="search-button-component"
-      className="w-full h-full bg-green-700 text-sm rounded-md hover:bg-green-800"
+      className="w-full h-full bg-green-700 rounded-md hover:bg-green-800 flex justify-center items-center"
     >
-      Pesquisar
+      <BiSearch data-testid='icon-search' className='text-white text-xl font-bold'/>
     </button>
   );
 };
