@@ -20,7 +20,7 @@ export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
       </header>
 
       <div className="w-full flex-1 flex justify-center items-center">
-        <main className="w-[80%] h-[60%] lg:w-[60%] rounded-md p-5 flex items-center flex-col shadow-sm ">
+        <main className="w-full h-[60%] md:w-[90%] lg:w-[80%] xl:[60%] rounded-md p-5 flex items-center flex-col shadow-sm ">
           <div className="w-full h-10 flex items-center">
             <div className="w-full h-full flex-1">
 
@@ -41,7 +41,7 @@ export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
               />
               </div>
           </div>
-          <div className="w-full h-[350px] bg-gray-800 rounded-md p-5 flex justify-center items-center">
+          <div className="w-full h-[350px] bg-gray-800 rounded-md p-5 flex justify-center items-center flex-1 mt-2">
             <GettedGitHubProfile
               data-testid="getted-github-profile-component"
               profileData={githubProfileData}
