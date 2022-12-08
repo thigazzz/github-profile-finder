@@ -2,7 +2,7 @@ import { render } from "@testing-library/react"
 import App from "./App"
 
 test('Render App', () => {
-    const {getByText} = render(<App/>)
+    const {getByTestId} = render(<App/>)
 
-    expect(getByText(/hello/i)).toBeInTheDocument()
+    expect(getByTestId('main-page-component')).toBeInTheDocument()
 })

@@ -3,8 +3,7 @@ import { MainPage } from "./pages/Main/MainPage"
 function App() {
   return (
     <div className="App">
-      hello 
-      <MainPage/>
+      <MainPage data-testid='main-page-component'/>
     </div>
   )
 }
