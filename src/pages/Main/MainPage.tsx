@@ -2,23 +2,13 @@ import { useState } from "react";
 import { GettedGitHubProfile } from "../../components/GettedGitHubProfile/GettedGitHubProfile";
 import { SearchButton } from "../../components/SearchButton/SearchButton";
 import { SearchInput } from "../../components/SearchInput/SearchInput";
+import { GithubUserData } from "./functions/receiveGithubUserProfileData";
 import { handleSearchUser } from "./handles/handleSearchUser";
 
 export const MainPage = () => {
   const [githubUsernameToSearch, setGithubUsernameToSearch] = useState("");
   const [githubProfileData, setGithubProfileData] = useState<
-    | {
-        name: string;
-        username: string;
-        avatar_url: string;
-        biography: string;
-        languages: string[];
-        followers: number;
-        following: number;
-        repositories: number;
-        stars: number;
-      }
-    | undefined
+    GithubUserData | undefined
   >(undefined);
 
   return (
@@ -33,7 +23,9 @@ export const MainPage = () => {
       />
       <SearchButton
         data-testid="search-button-component"
-        onClick={() => handleSearchUser(githubUsernameToSearch, setGithubProfileData)}
+        onClick={() =>
+          handleSearchUser(githubUsernameToSearch, setGithubProfileData)
+        }
       />
       <GettedGitHubProfile
         data-testid="getted-github-profile-component"
