@@ -9,7 +9,7 @@ export const handleSearchUser = async (username: string, setState: React.Dispatc
       username: receivedUsernameProfileData.username,
       avatar_url: receivedUsernameProfileData.avatar_url,
       biography: receivedUsernameProfileData.biography,
-      languages: ["Javascript", "PHP", "Haskell"],
+      languages: receivedUsernameProfileData.languages,
       followers: receivedUsernameProfileData.followers,
       following: receivedUsernameProfileData.following,
       repositories: receivedUsernameProfileData.repositories,
