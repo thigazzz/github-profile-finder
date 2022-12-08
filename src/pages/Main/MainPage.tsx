@@ -21,7 +21,7 @@ export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
 
       <div className="w-full flex-1 flex justify-center items-center">
         <main className="w-[80%] h-[60%] lg:w-[60%] rounded-md p-5 flex items-center flex-col shadow-sm">
-          <div className="w-full h-8 flex items-center">
+          <div className="w-full h-10 flex items-center">
             <SearchInput
               data-testid="search-input-component"
               onChange={(event) =>
