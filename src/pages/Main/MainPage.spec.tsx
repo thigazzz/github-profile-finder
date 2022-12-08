@@ -1,11 +1,11 @@
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import axios from "axios";
+import { githubApi } from "../../services/githubApi";
 import { MainPage } from "./MainPage";
 
-jest.mock('axios')
+jest.mock('../../services/githubApi')
 
-const mockedAxios = axios as jest.Mocked<typeof axios>
+const mockedAxios = githubApi as jest.Mocked<typeof githubApi>
 
 describe("Main Page", () => {
   it("should show a github user profile when user type in input and click to search", async () => {

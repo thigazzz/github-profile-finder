@@ -3,6 +3,7 @@ import { useState } from "react";
 import { GettedGitHubProfile } from "../../components/GettedGitHubProfile/GettedGitHubProfile";
 import { SearchButton } from "../../components/SearchButton/SearchButton";
 import { SearchInput } from "../../components/SearchInput/SearchInput";
+import { githubApi } from "../../services/githubApi";
 
 export const MainPage = () => {
   const [githubUsernameToSearch, setGithubUsernameToSearch] = useState("");
@@ -22,7 +23,7 @@ export const MainPage = () => {
   >(undefined);
 
   const handleSearchUser = async (username: string) => {
-    const { data: receivedUsernameProfileData } = await axios.get<{
+    const { data: receivedUsernameProfileData } = await githubApi.get<{
       login: string;
       name: string;
       avatar_url: string;
@@ -30,14 +31,14 @@ export const MainPage = () => {
       public_repos: number;
       followers: number;
       following: number;
-    }>(`https://api.github.com/users/${username}`);
+    }>(`users/${username}`);
     console.log(receivedUsernameProfileData);
-    const { data: receivedUsernameProgrammingLanguages } = await axios.get<
+    const { data: receivedUsernameProgrammingLanguages } = await githubApi.get<
       [{ language: string }]
-    >(`https://api.github.com/users/${username}/repos`);
+    >(`users/${username}/repos`);
     console.log(receivedUsernameProgrammingLanguages);
-    const { data: receivedUsernameStarred } = await axios.get<[]>(
-      `https://api.github.com/users/${username}/repos`
+    const { data: receivedUsernameStarred } = await githubApi.get<[]>(
+      `users/${username}/repos`
     );
     console.log(receivedUsernameStarred);
 
