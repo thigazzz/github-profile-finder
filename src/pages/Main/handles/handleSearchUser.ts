@@ -11,20 +11,20 @@ export const handleSearchUser = async (
 ) => {
   setLoading?.(true)
 
-  const receivedUsernameProfileData = await receiveGithubUserProfileData(
+  const {githubData, message} = await receiveGithubUserProfileData(
     username
   );
 
   setState({
-    name: receivedUsernameProfileData.name,
-    username: receivedUsernameProfileData.username,
-    avatar_url: receivedUsernameProfileData.avatar_url,
-    biography: receivedUsernameProfileData.biography,
-    languages: receivedUsernameProfileData.languages,
-    followers: receivedUsernameProfileData.followers,
-    following: receivedUsernameProfileData.following,
-    repositories: receivedUsernameProfileData.repositories,
-    stars: receivedUsernameProfileData.stars,
+    name: String(githubData?.name),
+    username: String(githubData?.username),
+    avatar_url: String(githubData?.avatar_url),
+    biography: String(githubData?.biography),
+    languages: githubData?.languages as string[],
+    followers: Number(githubData?.followers),
+    following: Number(githubData?.following),
+    repositories: Number(githubData?.repositories),
+    stars: Number(githubData?.stars),
   });
 
   setLoading?.(false)

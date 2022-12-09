@@ -2,21 +2,21 @@ import { githubApi } from "../../../services/githubApi";
 import { setMostUsedProgrammingLanguages } from "../utils/setMostUsedProgrammingLanguages";
 
 export interface GithubUserData {
-    name: string,
-    username: string,
-    avatar_url: string,
-    biography: string,
-    languages: string[],
-    followers: number,
-    following: number,
-    repositories: number,
-    stars: number,
+  name: string;
+  username: string;
+  avatar_url: string;
+  biography: string;
+  languages: string[];
+  followers: number;
+  following: number;
+  repositories: number;
+  stars: number;
 }
 
 export const receiveGithubUserProfileData = async (
   username: string
-): Promise<GithubUserData> => {
-  const receivedUsernameProfilePromise = githubApi.get<{
+): Promise<{ githubData: GithubUserData | null; message: string | null }> => {
+  const receivedUsernameProfilePromise = await githubApi.get<{
     login: string;
     name: string;
     avatar_url: string;
@@ -24,7 +24,16 @@ export const receiveGithubUserProfileData = async (
     public_repos: number;
     followers: number;
     following: number;
+    message?: string;
   }>(`users/${username}`);
+
+  if (receivedUsernameProfilePromise.data.message) {
+    return {
+      message: receivedUsernameProfilePromise.data.message,
+      githubData: null
+    };
+  }
+
   const receivedUsernameProgrammingLanguagesPromise = githubApi.get<
     [{ language: string }]
   >(`users/${username}/repos`);
@@ -33,20 +42,22 @@ export const receiveGithubUserProfileData = async (
   );
 
   const response = await Promise.all([
-    receivedUsernameProfilePromise,
     receivedUsernameProgrammingLanguagesPromise,
     receivedUsernameStarredPromise,
   ]);
 
   return {
-    name: response[0].data.name,
-    username: response[0].data.login,
-    avatar_url: response[0].data.avatar_url,
-    biography: response[0].data.bio,
-    languages: setMostUsedProgrammingLanguages(response[1].data),
-    followers: response[0].data.followers,
-    following: response[0].data.following,
-    repositories: response[0].data.public_repos,
-    stars: response[2].data.length,
+    githubData: {
+      name: receivedUsernameProfilePromise.data.name,
+      username: receivedUsernameProfilePromise.data.login,
+      avatar_url: receivedUsernameProfilePromise.data.avatar_url,
+      biography: receivedUsernameProfilePromise.data.bio,
+      languages: setMostUsedProgrammingLanguages(response[0].data),
+      followers: receivedUsernameProfilePromise.data.followers,
+      following: receivedUsernameProfilePromise.data.following,
+      repositories: receivedUsernameProfilePromise.data.public_repos,
+      stars: response[1].data.length,
+    },
+    message: null
   };
 };
