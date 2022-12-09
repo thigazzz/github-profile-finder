@@ -4,7 +4,7 @@ import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 
 interface GettedGitHubProfileProps
   extends React.SelectHTMLAttributes<HTMLDivElement> {
-  profileData?: {
+  profileData: {
     name: string;
     username: string;
     avatar_url: string;
@@ -14,8 +14,8 @@ interface GettedGitHubProfileProps
     following: number;
     repositories: number;
     stars: number;
-  };
-  errorMessage?: { message: string };
+  } | null;
+  errorMessage: { message: string } | null;
 }
 
 export const GettedGitHubProfile = ({
@@ -24,6 +24,8 @@ export const GettedGitHubProfile = ({
   ...rest
 }: GettedGitHubProfileProps) => {
   const { loading } = useContext(LoadingContext) as ILoadingContext;
+
+  console.log(profileData, errorMessage)
 
   return (
     <section

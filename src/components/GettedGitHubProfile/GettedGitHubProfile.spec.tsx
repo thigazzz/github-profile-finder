@@ -17,7 +17,10 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByText, getAllByTestId, getByTestId } = render(
       <LoadingContext.Provider value={{ loading: false }}>
-        <GettedGitHubProfile profileData={mockGithubProfileData} />
+        <GettedGitHubProfile
+          profileData={mockGithubProfileData}
+          errorMessage={null}
+        />
       </LoadingContext.Provider>
     );
 
@@ -51,7 +54,10 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByTestId } = render(
       <LoadingContext.Provider value={{ loading: false }}>
-        <GettedGitHubProfile profileData={mockGithubProfileData} />
+        <GettedGitHubProfile
+          profileData={mockGithubProfileData}
+          errorMessage={null}
+        />
       </LoadingContext.Provider>
     );
 
@@ -75,7 +81,10 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByTestId } = render(
       <LoadingContext.Provider value={{ loading: false }}>
-        <GettedGitHubProfile profileData={mockGithubProfileData} />
+        <GettedGitHubProfile
+          profileData={mockGithubProfileData}
+          errorMessage={null}
+        />
       </LoadingContext.Provider>
     );
 
@@ -97,7 +106,10 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByTestId } = render(
       <LoadingContext.Provider value={{ loading: false }}>
-        <GettedGitHubProfile profileData={mockGithubProfileData} />
+        <GettedGitHubProfile
+          profileData={mockGithubProfileData}
+          errorMessage={null}
+        />
       </LoadingContext.Provider>
     );
 
@@ -122,7 +134,10 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByText } = render(
       <LoadingContext.Provider value={{ loading: false }}>
-        <GettedGitHubProfile profileData={mockGithubProfileData} />
+        <GettedGitHubProfile
+          profileData={mockGithubProfileData}
+          errorMessage={null}
+        />
       </LoadingContext.Provider>
     );
 
@@ -142,7 +157,10 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByText } = render(
       <LoadingContext.Provider value={{ loading: false }}>
-        <GettedGitHubProfile profileData={mockGithubProfileData} />
+        <GettedGitHubProfile
+          profileData={mockGithubProfileData}
+          errorMessage={null}
+        />
       </LoadingContext.Provider>
     );
 
@@ -162,7 +180,10 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByText } = render(
       <LoadingContext.Provider value={{ loading: false }}>
-        <GettedGitHubProfile profileData={mockGithubProfileData} />
+        <GettedGitHubProfile
+          profileData={mockGithubProfileData}
+          errorMessage={null}
+        />
       </LoadingContext.Provider>
     );
 
@@ -182,7 +203,10 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByText } = render(
       <LoadingContext.Provider value={{ loading: false }}>
-        <GettedGitHubProfile profileData={mockGithubProfileData} />
+        <GettedGitHubProfile
+          profileData={mockGithubProfileData}
+          errorMessage={null}
+        />
       </LoadingContext.Provider>
     );
 
@@ -202,20 +226,25 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByTestId } = render(
       <LoadingContext.Provider value={{ loading: true }}>
-        <GettedGitHubProfile profileData={mockGithubProfileData}/>
+        <GettedGitHubProfile
+          profileData={mockGithubProfileData}
+          errorMessage={null}
+        />
       </LoadingContext.Provider>
     );
 
     expect(getByTestId("loading-component")).toBeInTheDocument();
   });
-  it('should render a div with message: user not found', () => {
+  it("should render a div with message: user not found", () => {
     const { getByText } = render(
       <LoadingContext.Provider value={{ loading: true }}>
-        <GettedGitHubProfile errorMessage={{message: 'User not found'}}/>
+        <GettedGitHubProfile
+          errorMessage={{ message: "User not found" }}
+          profileData={null}
+        />
       </LoadingContext.Provider>
     );
 
     expect(getByText(/user not found/i)).toBeInTheDocument();
-  })
-
+  });
 });

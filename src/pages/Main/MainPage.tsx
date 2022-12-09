@@ -10,8 +10,16 @@ export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
   const {setLoading} = useContext(LoadingContext) as ILoadingContext
   const [githubUsernameToSearch, setGithubUsernameToSearch] = useState("");
   const [githubProfileData, setGithubProfileData] = useState<
-    GithubUserData | undefined
-  >(undefined);
+    {
+      githubUserData: GithubUserData | null,
+      errorMessage: {
+        message: string
+      } | null
+    }
+  >({
+    errorMessage: null,
+    githubUserData: null
+  });
 
   return (
     <div {...rest} className="w-full h-full flex  items-center flex-col">
@@ -46,7 +54,8 @@ export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
           <div className="w-full sm:h-[350px] bg-gray-800 rounded-md  p-5 flex justify-center items-center flex-1 mt-2 overflow-hidden">
             <GettedGitHubProfile
               data-testid="getted-github-profile-component"
-              profileData={githubProfileData}
+              profileData={githubProfileData.githubUserData}
+              errorMessage={githubProfileData.errorMessage}
             />
           </div>
         </main>
