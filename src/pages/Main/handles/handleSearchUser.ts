@@ -38,7 +38,7 @@ export const handleSearchUser = async (
       name: String(githubData?.name),
       username: String(githubData?.username),
       avatar_url: String(githubData?.avatar_url),
-      biography: String(githubData?.biography),
+      biography: githubData?.biography || '',
       languages: githubData?.languages as string[],
       followers: Number(githubData?.followers),
       following: Number(githubData?.following),
