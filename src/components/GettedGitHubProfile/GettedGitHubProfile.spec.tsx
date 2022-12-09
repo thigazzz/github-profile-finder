@@ -208,4 +208,14 @@ describe("Getted Git Hub Profile", () => {
 
     expect(getByTestId("loading-component")).toBeInTheDocument();
   });
+  it('should render a div with message: user not found', () => {
+    const { getByText } = render(
+      <LoadingContext.Provider value={{ loading: true }}>
+        <GettedGitHubProfile errorMessage={{message: 'User not found'}}/>
+      </LoadingContext.Provider>
+    );
+
+    expect(getByText(/user not found/i)).toBeInTheDocument();
+  })
+
 });

@@ -15,10 +15,12 @@ interface GettedGitHubProfileProps
     repositories: number;
     stars: number;
   };
+  errorMessage?: { message: string };
 }
 
 export const GettedGitHubProfile = ({
   profileData,
+  errorMessage,
   ...rest
 }: GettedGitHubProfileProps) => {
   const { loading } = useContext(LoadingContext) as ILoadingContext;
@@ -71,7 +73,10 @@ export const GettedGitHubProfile = ({
                 </h3>
                 <ul data-testid="github-profile-languages-element" className="">
                   {profileData?.languages.map((language) => (
-                    <li key={language} className="mt-2 text-xs md:text-sm lg:text-lg">
+                    <li
+                      key={language}
+                      className="mt-2 text-xs md:text-sm lg:text-lg"
+                    >
                       {language}
                     </li>
                   ))}
@@ -111,7 +116,13 @@ export const GettedGitHubProfile = ({
           )}
         </>
       ) : (
-        <div>no user</div>
+        <>
+          {errorMessage ? (
+            <div>{errorMessage.message}</div>
+          ) : (
+            <div>no user</div>
+          )}
+        </>
       )}
     </section>
   );
