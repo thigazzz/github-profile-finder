@@ -5,15 +5,17 @@ import { auth } from "../firebaseApi";
 export const getAccessToken = (
   setUser: React.Dispatch<
     SetStateAction<{
-      name: string;
-      email: string;
-      url_profile: string;
+      name: string,
+      email: string,
+      url_profile: string,
     } | null>
-  >,
+  > | null,
   setToken: React.Dispatch<SetStateAction<string | null>> | null
 ) =>
   getRedirectResult(auth)
     .then((result) => {
+
+        console.log('aaaaaaaaaaaa')
       if (result) {
         const credential = GithubAuthProvider.credentialFromResult(result);
 
@@ -23,7 +25,7 @@ export const getAccessToken = (
         }
 
         const user = result?.user;
-        setUser({
+        setUser?.({
           name: user.displayName || "",
           email: user.email || "",
           url_profile: user.photoURL || "",

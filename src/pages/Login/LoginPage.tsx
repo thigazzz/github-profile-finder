@@ -1,12 +1,38 @@
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { LoginWithGithubButton } from "../../components/LoginWithGithubButton/LoginWithGithubButton";
+import { AuthContext, IAuthContext } from "../../contexts/auth/AuthContext";
+import { getAccessToken } from "../../services/firebase/functions/getAccessToken";
 
 export const LoginPage = () => {
+  const { signInWithGithub, user, token, getAndSetAccessToken } = useContext(
+    AuthContext
+  ) as IAuthContext;
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    signInWithGithub();
+    
+  };
+
+  useEffect(() => {
+    getAndSetAccessToken();
+  }, []);
+
+  console.log(user, token);
+
   return (
     <div className="w-full h-full flex items-center justify-between flex-col sm:flex-row">
       <section className="w-full h-[30%] bg-gradient-to-b from-green-600 to-gray-900 flex items-center justify-center sm:w-[40%] md:w-[60%] sm:h-full sm:bg-gradient-to-r">
-        <h2 className="text-center text-gray-200 text-xl md:text-2xl" data-testid='slogan-container'>
+        <h2
+          className="text-center text-gray-200 text-xl md:text-2xl"
+          data-testid="slogan-container"
+        >
           Find your favorite <br />{" "}
-          <span className="font-bold text-2xl md:text-3xl"> programming developers</span>
+          <span className="font-bold text-2xl md:text-3xl">
+            {" "}
+            programming developers
+          </span>
         </h2>
       </section>
       <section className="flex-1 flex  flex-col w-full p-4">
@@ -18,7 +44,7 @@ export const LoginPage = () => {
         <div className="w-full flex-1 flex items-center justify-center ">
           <div className="h-20 w-full">
             <LoginWithGithubButton
-              onLogin={() => console.log()}
+              onLogin={handleLogin}
               data-testid="login-with-github-button-component"
             />
           </div>
