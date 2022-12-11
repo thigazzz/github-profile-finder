@@ -5,7 +5,7 @@ import { AuthContext, IAuthContext } from "../../contexts/auth/AuthContext";
 import { getAccessToken } from "../../services/firebase/functions/getAccessToken";
 
 export const LoginPage = () => {
-  const { signInWithGithub, user, token, getAndSetAccessToken } = useContext(
+  const { signInWithGithub } = useContext(
     AuthContext
   ) as IAuthContext;
   const navigate = useNavigate();
@@ -14,12 +14,6 @@ export const LoginPage = () => {
     signInWithGithub();
     
   };
-
-  useEffect(() => {
-    getAndSetAccessToken();
-  }, []);
-
-  console.log(user, token);
 
   return (
     <div className="w-full h-full flex items-center justify-between flex-col sm:flex-row">
