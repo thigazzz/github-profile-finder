@@ -1,5 +1,6 @@
 import { createContext, ReactNode, SetStateAction, useState } from "react";
 import { getAccessToken } from "../../services/firebase/functions/getAccessToken";
+import { signIn } from "../../services/firebase/functions/signIn";
 
 interface IAuthContext {
   user: { name: string; email: string; url_profile: string } | null;
@@ -22,6 +23,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState<string | null>(null);
 
   const signInWithGithub = async () => {
+    await signIn()
     await getAccessToken(setUser, setToken);
 
     localStorage.setItem("user", JSON.stringify(user));
