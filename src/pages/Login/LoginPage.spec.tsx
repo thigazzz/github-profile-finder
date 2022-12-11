@@ -3,17 +3,18 @@ import { LoginPage } from "./LoginPage";
 
 describe("Login Page", () => {
   it("should have a slogan title", () => {
-    const { getByText } = render(<LoginPage />);
+    const { getByTestId } = render(<LoginPage />);
+    const sloganContainerElement = getByTestId("slogan-container");
 
-    expect(
-      getByText(/Find your favorite programming developers/i)
-    ).toBeInTheDocument();
+    expect(sloganContainerElement).toHaveTextContent(
+      /Find your favorite programming developers/i
+    );
   });
-  it('should have a button github login', () => {
+  it("should have a button github login", () => {
     const { getByTestId } = render(<LoginPage />);
 
     expect(
-        getByTestId(/login-with-github-button-component/i)
-      ).toBeInTheDocument();
-  })
+      getByTestId(/login-with-github-button-component/i)
+    ).toBeInTheDocument();
+  });
 });
