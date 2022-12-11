@@ -9,7 +9,7 @@ export interface IAuthContext {
   > | null;
   token: string | null;
   setToken: React.Dispatch<SetStateAction<string | null>> | null;
-  signInWithGithub: () => void;
+  signInWithGithub: () => Promise<void>;
   getAndSetAccessToken: () => void
 }
 
@@ -32,11 +32,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     
   };
   const getAndSetAccessToken =  async () => {
+    console.log('bbbbbbbbb')
     await getAccessToken(setUser, setToken);
 
+    console.log('zzzzzzzzzzz', user, token)
 
-    localStorage.setItem("user", JSON.stringify(user));
-    localStorage.setItem("token", token || "");
+    
   }
 
   return (

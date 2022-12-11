@@ -5,15 +5,23 @@ import { AuthContext, IAuthContext } from "../../contexts/auth/AuthContext";
 import { getAccessToken } from "../../services/firebase/functions/getAccessToken";
 
 export const LoginPage = () => {
-  const { signInWithGithub } = useContext(
+  const { signInWithGithub, token, user,getAndSetAccessToken } = useContext(
     AuthContext
   ) as IAuthContext;
   const navigate = useNavigate();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     signInWithGithub();
     
+    navigate('/')
   };
+
+   useEffect(() => {
+     getAndSetAccessToken();
+   }, []);
+
+  console.log('aaaaaaaaaaaaaaaa', user, token)
+  console.log('cccccccc', localStorage.getItem('token'))
 
   return (
     <div className="w-full h-full flex items-center justify-between flex-col sm:flex-row">

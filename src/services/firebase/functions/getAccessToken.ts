@@ -15,7 +15,7 @@ export const getAccessToken = (
   getRedirectResult(auth)
     .then((result) => {
 
-        console.log('aaaaaaaaaaaa')
+        console.log('ffffff')
       if (result) {
         const credential = GithubAuthProvider.credentialFromResult(result);
 
@@ -30,6 +30,9 @@ export const getAccessToken = (
           email: user.email || "",
           url_profile: user.photoURL || "",
         });
+
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("token", credential?.accessToken || "");
       }
     })
     .catch((error) => {
