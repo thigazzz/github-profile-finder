@@ -1,12 +1,15 @@
 import React, { useContext, useState } from "react";
 import { GettedGitHubProfile } from "../../components/GettedGitHubProfile/GettedGitHubProfile";
+import { LoginOrLogoutWithGithubButton } from "../../components/LoginWithGithubButton/LoginWithGithubButton";
 import { SearchButton } from "../../components/SearchButton/SearchButton";
 import { SearchInput } from "../../components/SearchInput/SearchInput";
+import { AuthContext, IAuthContext } from "../../contexts/auth/AuthContext";
 import { ILoadingContext, LoadingContext } from "../../contexts/LoadingContext";
 import { GithubUserData } from "./functions/receiveGithubUserProfileData";
 import { handleSearchUser } from "./handles/handleSearchUser";
 
 export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
+  const {user} = useContext(AuthContext) as IAuthContext
   const {setLoading} = useContext(LoadingContext) as ILoadingContext
   const [githubUsernameToSearch, setGithubUsernameToSearch] = useState("");
   const [githubProfileData, setGithubProfileData] = useState<
@@ -21,12 +24,21 @@ export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
     githubUserData: null
   });
 
+  console.log(user)
+
   return (
     <div {...rest} className="w-full h-full flex  items-center flex-col">
-      <header className="w-full h-[8vh] bg-gray-700 justify-self-start p-5 flex items-center">
+      <header className="w-full h-[8vh]  justify-self-start p-5 flex items-center justify-between">
         <span className="text-white lg:text-xl font-bold text-lg">
           git.Search
         </span>
+        <div className="w-40 h-full flex items-center justify-center "> 
+        <LoginOrLogoutWithGithubButton
+              data-testid="login-with-github-button-component"
+            >
+              {user?.name}
+            </LoginOrLogoutWithGithubButton>
+        </div>
       </header>
 
       <div className="w-full flex-1 flex justify-center items-center">

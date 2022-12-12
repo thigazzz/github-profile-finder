@@ -23,9 +23,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState<string | null>(null);
 
   const signInWithGithub = async () => {
-    const {token, user} = await signInWithGithubPopUp();
+    const { token, user } = await signInWithGithubPopUp();
 
-    console.log(token, user)
+    console.log(token, user);
+
+    setUser(user as { name: string; email: string; url_profile: string });
+    setToken(token)
 
     localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem("token", token || "");

@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoginWithGithubButton } from "../../components/LoginWithGithubButton/LoginWithGithubButton";
+import { LoginOrLogoutWithGithubButton } from "../../components/LoginWithGithubButton/LoginWithGithubButton";
 import { AuthContext, IAuthContext } from "../../contexts/auth/AuthContext";
 
 export const LoginPage = () => {
@@ -35,10 +35,12 @@ export const LoginPage = () => {
         </div> */}
         <div className="w-full flex-1 flex items-center justify-center ">
           <div className="h-20 w-full">
-            <LoginWithGithubButton
+            <LoginOrLogoutWithGithubButton
               onLogin={handleLogin}
               data-testid="login-with-github-button-component"
-            />
+            >
+              Login with Github
+            </LoginOrLogoutWithGithubButton>
           </div>
         </div>
       </section>
