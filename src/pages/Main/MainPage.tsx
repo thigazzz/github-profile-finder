@@ -7,6 +7,7 @@ import { AuthContext, IAuthContext } from "../../contexts/auth/AuthContext";
 import { ILoadingContext, LoadingContext } from "../../contexts/LoadingContext";
 import { GithubUserData } from "./functions/receiveGithubUserProfileData";
 import { handleSearchUser } from "./handles/handleSearchUser";
+import {HiOutlineLogout} from 'react-icons/hi'
 
 export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
   const {user} = useContext(AuthContext) as IAuthContext
@@ -32,11 +33,15 @@ export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
         <span className="text-white lg:text-xl font-bold text-lg">
           git.Search
         </span>
-        <div className="w-40 h-full flex items-center justify-center "> 
+        <div className="h-full flex items-center justify-center "> 
         <LoginOrLogoutWithGithubButton
               data-testid="login-with-github-button-component"
             >
+              <div className="flex-1 text-xs sm:text-sm xl:text-lg h-full flex justify-center items-center">
+
               {user?.name}
+              <HiOutlineLogout className="ml-2 text-lg"/>
+              </div>
             </LoginOrLogoutWithGithubButton>
         </div>
       </header>
