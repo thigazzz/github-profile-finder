@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GettedGitHubProfile } from "../../components/GettedGitHubProfile/GettedGitHubProfile";
 import { LoginOrLogoutWithGithubButton } from "../../components/LoginWithGithubButton/LoginWithGithubButton";
 import { SearchButton } from "../../components/SearchButton/SearchButton";
@@ -11,7 +11,7 @@ import { HiOutlineLogout } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 
 export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
-  const { user, logoutWithGithub } = useContext(AuthContext) as IAuthContext;
+  const { user, logoutWithGithub, setUser, setToken } = useContext(AuthContext) as IAuthContext;
   const { setLoading } = useContext(LoadingContext) as ILoadingContext;
   const navigate = useNavigate();
   const [githubUsernameToSearch, setGithubUsernameToSearch] = useState("");
@@ -30,6 +30,11 @@ export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
 
     navigate("/auth/login");
   };
+
+  useEffect(() => {
+    setUser?.(JSON.parse(localStorage.getItem('user') || ''))
+    setToken?.(localStorage.getItem('token'))
+  }, []);
 
   return (
     <div {...rest} className="w-full h-full flex  items-center flex-col">

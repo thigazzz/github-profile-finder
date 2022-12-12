@@ -1,4 +1,10 @@
-import { createContext, ReactNode, SetStateAction, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { getAccessToken } from "../../services/firebase/functions/getAccessToken";
 import { logout } from "../../services/firebase/functions/logout";
 import { signInWithGithubPopUp } from "../../services/firebase/functions/signIn";
@@ -44,6 +50,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
   };
+
 
   return (
     <AuthContext.Provider
