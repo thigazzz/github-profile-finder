@@ -25,8 +25,6 @@ export const GettedGitHubProfile = ({
 }: GettedGitHubProfileProps) => {
   const { loading } = useContext(LoadingContext) as ILoadingContext;
 
-  console.log(profileData, errorMessage)
-
   return (
     <section
       {...rest}
