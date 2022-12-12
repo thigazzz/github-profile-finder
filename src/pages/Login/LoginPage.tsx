@@ -4,19 +4,13 @@ import { LoginWithGithubButton } from "../../components/LoginWithGithubButton/Lo
 import { AuthContext, IAuthContext } from "../../contexts/auth/AuthContext";
 
 export const LoginPage = () => {
-  const { signInWithGithub } = useContext(
-    AuthContext
-  ) as IAuthContext;
+  const { signInWithGithub } = useContext(AuthContext) as IAuthContext;
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     await signInWithGithub();
 
-    console.log('cccccc')
-    
-    navigate('/')
-
-    console.log('fffffff')
+    navigate("/");
   };
 
   return (
