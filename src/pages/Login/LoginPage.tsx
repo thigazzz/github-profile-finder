@@ -2,26 +2,22 @@ import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginWithGithubButton } from "../../components/LoginWithGithubButton/LoginWithGithubButton";
 import { AuthContext, IAuthContext } from "../../contexts/auth/AuthContext";
-import { getAccessToken } from "../../services/firebase/functions/getAccessToken";
 
 export const LoginPage = () => {
-  const { signInWithGithub, token, user,getAndSetAccessToken } = useContext(
+  const { signInWithGithub } = useContext(
     AuthContext
   ) as IAuthContext;
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    signInWithGithub();
+    await signInWithGithub();
+
+    console.log('cccccc')
     
     navigate('/')
+
+    console.log('fffffff')
   };
-
-   useEffect(() => {
-     getAndSetAccessToken();
-   }, []);
-
-  console.log('aaaaaaaaaaaaaaaa', user, token)
-  console.log('cccccccc', localStorage.getItem('token'))
 
   return (
     <div className="w-full h-full flex items-center justify-between flex-col sm:flex-row">
