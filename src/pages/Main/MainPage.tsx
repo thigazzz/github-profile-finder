@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { GettedGitHubProfile } from "../../components/GettedGitHubProfile/GettedGitHubProfile";
+import { ShowGithubProfileInformations } from "../../components/ShowGithubProfileInformations/ShowGithubProfileInformations";
 import { LoginOrLogoutWithGithubButton } from "../../components/LoginWithGithubButton/LoginWithGithubButton";
 import { SearchButton } from "../../components/SearchButton/SearchButton";
 import { SearchInput } from "../../components/SearchInput/SearchInput";
@@ -81,7 +81,7 @@ export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
             </div>
           </div>
           <div className="w-full sm:h-[350px] bg-gray-800 rounded-md  p-5 flex justify-center items-center flex-1 mt-2 overflow-hidden">
-            <GettedGitHubProfile
+            <ShowGithubProfileInformations
               data-testid="getted-github-profile-component"
               profileData={githubProfileData.githubUserData}
               errorMessage={githubProfileData.errorMessage}

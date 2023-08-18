@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { LoadingContext } from "../../contexts/LoadingContext";
-import { GettedGitHubProfile } from "./GettedGitHubProfile";
+import { ShowGithubProfileInformations } from "./ShowGithubProfileInformations";
 
 describe("Getted Git Hub Profile", () => {
   it("should get the github profile data and set on fields", () => {
@@ -17,7 +17,7 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByText, getAllByTestId, getByTestId } = render(
       <LoadingContext.Provider value={{ loading: false }}>
-        <GettedGitHubProfile
+        <ShowGithubProfileInformations
           profileData={mockGithubProfileData}
           errorMessage={null}
         />
@@ -54,7 +54,7 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByTestId } = render(
       <LoadingContext.Provider value={{ loading: false }}>
-        <GettedGitHubProfile
+        <ShowGithubProfileInformations
           profileData={mockGithubProfileData}
           errorMessage={null}
         />
@@ -81,7 +81,7 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByTestId } = render(
       <LoadingContext.Provider value={{ loading: false }}>
-        <GettedGitHubProfile
+        <ShowGithubProfileInformations
           profileData={mockGithubProfileData}
           errorMessage={null}
         />
@@ -106,7 +106,7 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByTestId } = render(
       <LoadingContext.Provider value={{ loading: false }}>
-        <GettedGitHubProfile
+        <ShowGithubProfileInformations
           profileData={mockGithubProfileData}
           errorMessage={null}
         />
@@ -134,7 +134,7 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByText } = render(
       <LoadingContext.Provider value={{ loading: false }}>
-        <GettedGitHubProfile
+        <ShowGithubProfileInformations
           profileData={mockGithubProfileData}
           errorMessage={null}
         />
@@ -157,7 +157,7 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByText } = render(
       <LoadingContext.Provider value={{ loading: false }}>
-        <GettedGitHubProfile
+        <ShowGithubProfileInformations
           profileData={mockGithubProfileData}
           errorMessage={null}
         />
@@ -180,7 +180,7 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByText } = render(
       <LoadingContext.Provider value={{ loading: false }}>
-        <GettedGitHubProfile
+        <ShowGithubProfileInformations
           profileData={mockGithubProfileData}
           errorMessage={null}
         />
@@ -203,7 +203,7 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByText } = render(
       <LoadingContext.Provider value={{ loading: false }}>
-        <GettedGitHubProfile
+        <ShowGithubProfileInformations
           profileData={mockGithubProfileData}
           errorMessage={null}
         />
@@ -226,7 +226,7 @@ describe("Getted Git Hub Profile", () => {
     };
     const { getByTestId } = render(
       <LoadingContext.Provider value={{ loading: true }}>
-        <GettedGitHubProfile
+        <ShowGithubProfileInformations
           profileData={mockGithubProfileData}
           errorMessage={null}
         />
@@ -238,7 +238,7 @@ describe("Getted Git Hub Profile", () => {
   it("should render a div with message: user not found", () => {
     const { getByText } = render(
       <LoadingContext.Provider value={{ loading: true }}>
-        <GettedGitHubProfile
+        <ShowGithubProfileInformations
           errorMessage={{ message: "User not found" }}
           profileData={null}
         />
