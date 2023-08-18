@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import {GettedGitHubProfileProps} from './interfaces_props/ShowGithubProfileInformationsProps'
+import {GettedGitHubProfileProps} from './interface/ShowGithubProfileInformationsProps'
 import { ILoadingContext, LoadingContext } from "../../contexts/LoadingContext";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
-import { GithubInformations } from "./GithubInformations/GithubInformations";
-import { ShowGithubProfileNotFound } from "./ShowGithubProfileNotFound/ShowGithubProfileNotFound";
+import { GithubInformations } from "./components/GithubInformations/GithubInformations";
+import { ShowGithubProfileNotFound } from "./components/ShowGithubProfileNotFound/ShowGithubProfileNotFound";
 
 export const ShowGithubProfileInformations = ({
   profileData,

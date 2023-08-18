@@ -1,4 +1,4 @@
-import {ContentGettedGutHubProfileProps} from '../interfaces_props/GithubInformationsProps'
+import {ContentGettedGutHubProfileProps} from './interface/GithubInformationsProps'
 
 export const GithubInformations = ({profileData}: ContentGettedGutHubProfileProps) => {
   return (

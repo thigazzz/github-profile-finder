@@ -1,4 +1,4 @@
-import {ShowGithubProfileNotFoundProps} from '../interfaces_props/ShowGithubProfileNotFoundProps'
+import {ShowGithubProfileNotFoundProps} from './interface/ShowGithubProfileNotFoundProps'
 
 export const ShowGithubProfileNotFound = ({errorMessage}: ShowGithubProfileNotFoundProps) => {
     return (

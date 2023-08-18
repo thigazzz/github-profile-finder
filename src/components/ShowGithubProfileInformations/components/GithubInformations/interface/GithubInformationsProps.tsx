@@ -1,4 +1,4 @@
-import {Profile} from '../../../interfaces/Profile'
+import {Profile} from '../../../../../interfaces/Profile'
 
 export interface ContentGettedGutHubProfileProps {
     profileData: Profile | null
