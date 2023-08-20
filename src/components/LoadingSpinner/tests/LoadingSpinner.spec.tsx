@@ -1,22 +1,17 @@
 import { render } from "@testing-library/react";
-import { LoadingContext } from "../../contexts/LoadingContext";
-import { LoadingSpinner } from "./LoadingSpinner";
+import {MakeRenderContextComponent} from './factory/MakeRenderComponent'
 
 describe("Loading Spinner Component", () => {
   it("should render if loading context i true", () => {
     const { getByTestId } = render(
-      <LoadingContext.Provider value={{ loading: true }}>
-        <LoadingSpinner />
-      </LoadingContext.Provider>
+      <MakeRenderContextComponent isLoading={true}/>
     );
 
     expect(getByTestId("loading")).toBeInTheDocument();
   });
   it("not should render component when loading is false", () => {
     const { queryByTestId } = render(
-      <LoadingContext.Provider value={{ loading: false }}>
-        <LoadingSpinner />
-      </LoadingContext.Provider>
+      <MakeRenderContextComponent isLoading={false}/>
     );
 
     expect(queryByTestId("loading")).not.toBeInTheDocument();
