@@ -1,19 +1,13 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
 import { BsGithub } from "react-icons/bs";
+import { LoginWithGithubButtonProps } from "./interfaces/LoginOrLogoutWithGithubButtonProps";
 
-interface LoginOrLogoutWithGithubButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
-  onLogin?: () => void;
-  onLogout?: () => void;
-  children: ReactNode
-}
 
 export const LoginOrLogoutWithGithubButton = ({
   onLogin,
   onLogout,
   children,
   ...rest
-}: LoginOrLogoutWithGithubButtonProps) => {
+}: LoginWithGithubButtonProps) => {
   return (
     <button
       {...rest}
