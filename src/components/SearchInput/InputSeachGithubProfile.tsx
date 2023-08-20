@@ -1,4 +1,4 @@
-export const SearchInput = ({ ...rest }: React.InputHTMLAttributes<HTMLInputElement>) => {
+export const InputSeachGithubProfile = ({ ...rest }: React.InputHTMLAttributes<HTMLInputElement>) => {
     return (
       <input
         type="text"
