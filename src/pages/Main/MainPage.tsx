@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ShowGithubProfileInformations } from "../../components/ShowGithubProfileInformations/ShowGithubProfileInformations";
-import { LoginOrLogoutWithGithubButton } from "../../components/LoginWithGithubButton/LoginWithGithubButton";
+import { LoginOrLogoutWithGithubButton } from "../../components/LoginOrLogoutWithGithubButton/LoginOrLogoutWithGithubButton";
 import { SearchButton } from "../../components/SearchButton/SearchButton";
-import { SearchInput } from "../../components/SearchInput/SearchInput";
+import { InputSeachGithubProfile } from "../../components/SearchInput/InputSeachGithubProfile";
 import { AuthContext, IAuthContext } from "../../contexts/auth/AuthContext";
 import { ILoadingContext, LoadingContext } from "../../contexts/LoadingContext";
-import { GithubUserData } from "./functions/receiveGithubUserProfileData";
+import { receiveGithubUserProfileData } from "./functions/receiveGithubUserProfileData";
 import { handleSearchUser } from "./handles/handleSearchUser";
 import { HiOutlineLogout } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+import { Profile } from "../../interfaces/Profile";
 
 export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
   const { user, logoutWithGithub, setUser, setToken } = useContext(AuthContext) as IAuthContext;
@@ -16,7 +17,7 @@ export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
   const navigate = useNavigate();
   const [githubUsernameToSearch, setGithubUsernameToSearch] = useState("");
   const [githubProfileData, setGithubProfileData] = useState<{
-    githubUserData: GithubUserData | null;
+    githubUserData: Profile | null;
     errorMessage: {
       message: string;
     } | null;
@@ -59,7 +60,7 @@ export const MainPage = ({ ...rest }: React.HTMLAttributes<HTMLDivElement>) => {
         <main className="w-full h-[80%] sm:h-[60%] md:w-[90%] lg:w-[80%] xl:w-[70%] rounded-md p-5 flex items-center flex-col shadow-sm ">
           <div className="w-full h-10 md:h-14 flex items-center">
             <div className="w-full h-full flex-1">
-              <SearchInput
+              <InputSeachGithubProfile
                 data-testid="search-input-component"
                 onChange={(event) =>
                   setGithubUsernameToSearch(event.target.value)

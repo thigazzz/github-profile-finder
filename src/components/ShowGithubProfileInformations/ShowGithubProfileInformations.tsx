@@ -11,7 +11,7 @@ export const ShowGithubProfileInformations = ({
   ...rest
 }: GettedGitHubProfileProps) => {
   const { loading } = useContext(LoadingContext) as ILoadingContext;
-
+  console.log(profileData)
   return (
     <section
       {...rest}

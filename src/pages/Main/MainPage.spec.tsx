@@ -11,7 +11,7 @@ const mockedAxios = githubApi as jest.Mocked<typeof githubApi>;
 
 describe("Main Page", () => {
   it("should show a github user profile when user type in input and click to search", async () => {
-    const { getByTestId, debug } = render(<MainPage />, {
+    const { getByTestId } = render(<MainPage />, {
       wrapper: LoadingProvider,
     });
     mockedAxios.get

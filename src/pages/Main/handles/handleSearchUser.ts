@@ -1,14 +1,14 @@
 import React, { SetStateAction } from "react";
 import {
-  GithubUserData,
   receiveGithubUserProfileData,
 } from "../functions/receiveGithubUserProfileData";
+import { Profile } from "../../../interfaces/Profile";
 
 export const handleSearchUser = async (
   username: string,
   setState: React.Dispatch<
     SetStateAction<{
-      githubUserData: GithubUserData | null;
+      githubUserData: Profile | null;
       errorMessage: {
         message: string;
       } | null;

@@ -4,9 +4,8 @@ import { LoginPage } from "./LoginPage";
 describe("Login Page", () => {
   it("should have a slogan title", () => {
     const { getByTestId } = render(<LoginPage />);
-    const sloganContainerElement = getByTestId("slogan-container");
 
-    expect(sloganContainerElement).toHaveTextContent(
+    expect(getByTestId("slogan-container")).toHaveTextContent(
       /Find your favorite programming developers/i
     );
   });

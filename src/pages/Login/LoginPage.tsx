@@ -1,17 +1,12 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoginOrLogoutWithGithubButton } from "../../components/LoginWithGithubButton/LoginWithGithubButton";
+import { LoginOrLogoutWithGithubButton } from "../../components/LoginOrLogoutWithGithubButton/LoginOrLogoutWithGithubButton";
 import { AuthContext, IAuthContext } from "../../contexts/auth/AuthContext";
+import { handleSignInWithGithub } from "./utils/handleLogin";
 
 export const LoginPage = () => {
   const { signInWithGithub } = useContext(AuthContext) as IAuthContext;
   const navigate = useNavigate();
-
-  const handleLogin = async () => {
-    await signInWithGithub();
-
-    navigate("/");
-  };
 
   return (
     <div className="w-full h-full flex items-center justify-between flex-col sm:flex-row">
@@ -28,15 +23,10 @@ export const LoginPage = () => {
         </h2>
       </section>
       <section className="flex-1 flex  flex-col w-full p-4">
-        {/* <div className="mt-10 w-full">
-          <span className="font-medium text-gray-200 text-start text-lg">
-            Sign In
-          </span>
-        </div> */}
         <div className="w-full flex-1 flex items-center justify-center ">
           <div className="h-20 w-full">
             <LoginOrLogoutWithGithubButton
-              onLogin={handleLogin}
+              onLogin={() => handleSignInWithGithub(signInWithGithub, navigate)}
               data-testid="login-with-github-button-component"
             >
               Login with Github

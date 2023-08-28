@@ -22,6 +22,9 @@ describe("Received Github User Profile", () => {
       .mockResolvedValueOnce({
         data: [
           { language: "Typescript" },
+          { language: "Typescript" },
+          { language: "Typescript" },
+          { language: "PHP" },
           { language: "PHP" },
           { language: "Haskell" },
         ],

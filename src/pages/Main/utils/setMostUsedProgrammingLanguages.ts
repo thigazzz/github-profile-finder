@@ -1,34 +1,64 @@
+const MAX_NUMBER_TO_RETURN_THE_MOST_LANGUAGES = 3
+
 export const setMostUsedProgrammingLanguages = (
-  receivedGithubUsernameRepositories: {language: string}[]
+  languagesUsedInRepositories: {language: string}[]
 ) => {
-  // Grabbing the name of the languages used. Not the amount of projects using this language => ['js', 'ts', 'html', ...]
-  const languagesNameInSequence: string[] = [];
-
-  receivedGithubUsernameRepositories.forEach((language) => {
-    if (!languagesNameInSequence.includes(language.language) && language.language !== null) {
-      languagesNameInSequence.push(language.language);
-    }
-  });
-
-  
-  // An array containing arrays with the names of the languages => [['js', 'js'], ['ts', ts'], ['html']]
-  const LanguagesNameWithoutRepetation = languagesNameInSequence.map(
-      (languageName) =>
-      receivedGithubUsernameRepositories.filter(
-          (language) => language.language === languageName
-      )
-  );
-  
-  // An array containing arrays with the name and the amount of each language
-  const languageWithTheirNamesAndAmoutOfEach = LanguagesNameWithoutRepetation.map((languages) => [
-      languages[0].language,
-      languages.length,
-    ]);
-    
-    const threeLanguagesMostUsed = languageWithTheirNamesAndAmoutOfEach
-    .sort((a: any, b: any) => b[1] - a[1]) // ordering in desc order | the greatest to lowest | 100 - 2
-    .slice(0, 3) // Grabbing the first 3
-    .map((arr: any) => arr[0]); // returning only the name of the language. Because this array contains the name and the amount
-
-  return threeLanguagesMostUsed as string[];
+  const languageWithTheirNamesAndAmoutOfEach = getLanguageWithTheirNamesAndAmoutOfEach(languagesUsedInRepositories)
+  return sortLanguagesFromMostUsedToLeastUsedLanguage(languageWithTheirNamesAndAmoutOfEach) as string[];
 };
+
+const getLanguageWithTheirNamesAndAmoutOfEach = ((languages: {language: string}[]) => {
+  return formatListOfLanguages(sortLanguagesAlphabetically(languages)).map((languages) => [
+    languages[0].language,
+    languages[0].count,
+  ]);
+})
+
+const sortLanguagesAlphabetically = (languages: {language: string}[]) => {
+  return languages.map(language => language.language).sort()
+}
+
+const formatListOfLanguages = (languages: string[]): [{language: string, count: number}][] => {
+  // format languages in an array of arrays
+  // example:
+  /*
+
+  [
+    [
+      language: any,
+      count: number of language is used
+    ]
+  ]
+
+  */
+  let index = 0
+  const languagesFormatted: [{language: string, count: number}][] = []
+  languages.forEach(nameOfLanguage => {
+    if (languagesFormatted.length === 0) {
+      languagesFormatted.push([{
+        language: nameOfLanguage,
+        count: 1
+      }])
+
+      return
+    }
+
+    if (nameOfLanguage === languagesFormatted[index][0].language) {
+      languagesFormatted[index][0].count++
+      return
+    }
+    languagesFormatted.push([{language: nameOfLanguage, count: 1}])
+    index++
+  })
+
+  return languagesFormatted
+}
+
+
+const sortLanguagesFromMostUsedToLeastUsedLanguage = (languages: (string | number)[][]) => {
+  return languages
+  .sort((a: any, b: any) => b[1] - a[1]) // ordering in desc order | the greatest to lowest | 100 - 2
+  .slice(0, MAX_NUMBER_TO_RETURN_THE_MOST_LANGUAGES)
+  .map((languageAndCount: (string | number)[]) => languageAndCount[0]);
+
+}
